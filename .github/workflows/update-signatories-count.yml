@@ -12,73 +12,69 @@ permissions:
 jobs:
   update-badges:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Count signatories (individuals + organizations)
+      - name: Count signatories
         id: counts
         shell: bash
         run: |
           set -euo pipefail
 
+          # Extract the first markdown table after a heading and count non-empty rows.
+          # - Skips the header row and separator row
+          # - Skips placeholder rows where the Name/Org column is empty
+          #
+          # For individuals, the "Name" column is column 3 in the raw split by "|":
+          #   | Signature # | Name | Role / Title | ...
+          # For organizations, the "Organization" column is column 3:
+          #   | Signature # | Organization | Type | ...
+          #
+          # Note: split($0,a,"|") yields:
+          #   a[1] = "" (before first |), a[2] = " Signature # ", a[3] = " Name ", etc.
+
           count_table_after_heading () {
             local heading="$1"
+            local name_col_index="$2"
 
-            # Extract the markdown table that appears after a given heading.
-            # Then count data rows:
-            # - rows starting with '|'
-            # - excluding header separator row like |---|
-            # - excluding the header row (we'll subtract 1)
-            # - excluding "placeholder" rows where Name is empty: "| 2 |  |  |  |  | YYYY-MM-DD |"
-            #
-            # Assumptions:
-            # - heading exists exactly as in SIGNATORIES.md
-            # - the first table after the heading is the relevant one
-
+            # 1) Find the first table after the heading
+            # 2) Output only table lines until the table ends
+            # 3) Count data rows with non-empty Name/Org cell
             awk -v heading="$heading" '
-              BEGIN { in_section=0; in_table=0; rowcount=0; }
-              $0 ~ "^# " heading "$" || $0 ~ "^# #" heading "$" || $0 ~ "^# ### " heading "$" || $0 ~ "^# #### " heading "$" { in_section=1; next }
+              BEGIN { in_section=0; in_table=0; }
+              $0 == heading { in_section=1; next }
               in_section && $0 ~ "^\\|" { in_table=1 }
               in_section && in_table {
-                # stop table when we hit a blank line that is not a table row
-                if ($0 !~ "^\\|") { exit }
-                # skip separator rows (---)
-                if ($0 ~ "^\\|[[:space:]-|:]+\\|[[:space:]]*$") next
-                # keep all table rows for now
+                if ($0 !~ "^\\|") exit
                 print
               }
             ' SIGNATORIES.md \
-            | awk '
-              BEGIN { n=0; }
+            | awk -v name_col_index="$name_col_index" '
+              function trim(s){ gsub(/^[ \t]+|[ \t]+$/, "", s); return s }
+              BEGIN { count=0 }
               {
-                # Skip the header row (first printed row)
-                if (NR==1) next
+                # Skip separator rows like |---|---|
+                if ($0 ~ /^(\|[[:space:]]*[-:]+[[:space:]]*)+\|[[:space:]]*$/) next
 
-                # Heuristic: treat as placeholder if the "Name" (3rd column) is empty after trimming.
-                # Split by "|" and trim spaces.
-                # Columns: 1 empty, 2 Signature#, 3 Name/Org, ...
+                # Skip header row (first non-separator table line)
+                if (!header_skipped) { header_skipped=1; next }
+
                 split($0, a, "|")
-                name=a[3]
-                gsub(/^[ \t]+|[ \t]+$/, "", name)
+                name = trim(a[name_col_index])
 
+                # Skip placeholder / empty entries
                 if (name == "") next
-                n++
+
+                count++
               }
-              END { print n; }
+              END { print count }
             '
           }
 
-          INDIV=$(count_table_after_heading "👤 Individual Signatories" || true)
-          ORGS=$(count_table_after_heading "🏢 Organizational Signatories" || true)
-
-          # If the headings include emojis but your file headings differ slightly, adjust the strings above.
-          # Fallback: try without emoji (common if you later remove them).
-          if [[ -z "${INDIV}" ]]; then INDIV=$(count_table_after_heading "Individual Signatories" || echo 0); fi
-          if [[ -z "${ORGS}" ]]; then ORGS=$(count_table_after_heading "Organizational Signatories" || echo 0); fi
-
-          INDIV=${INDIV:-0}
-          ORGS=${ORGS:-0}
+          INDIV=$(count_table_after_heading "# 👤 Individual Signatories" 3)
+          ORGS=$(count_table_after_heading "# 🏢 Organizational Signatories" 3)
           TOTAL=$((INDIV + ORGS))
 
           echo "individuals=$INDIV" >> "$GITHUB_OUTPUT"
@@ -86,22 +82,15 @@ jobs:
           echo "total=$TOTAL" >> "$GITHUB_OUTPUT"
 
       - name: Write badge JSON files
+        shell: bash
         run: |
           INDIV="${{ steps.counts.outputs.individuals }}"
           ORGS="${{ steps.counts.outputs.organizations }}"
           TOTAL="${{ steps.counts.outputs.total }}"
 
-          cat > signatories-individuals.json <<EOF
-          { "label": "Individuals", "message": "${INDIV}", "color": "blue" }
-          EOF
-
-          cat > signatories-organizations.json <<EOF
-          { "label": "Organizations", "message": "${ORGS}", "color": "blue" }
-          EOF
-
-          cat > signatories-total.json <<EOF
-          { "label": "Signatories", "message": "${TOTAL}", "color": "blue" }
-          EOF
+          printf '{ "label": "Individuals", "message": "%s", "color": "blue" }\n' "$INDIV" > signatories-individuals.json
+          printf '{ "label": "Organizations", "message": "%s", "color": "blue" }\n' "$ORGS" > signatories-organizations.json
+          printf '{ "label": "Signatories", "message": "%s", "color": "blue" }\n' "$TOTAL" > signatories-total.json
 
       - name: Commit badge updates
         uses: EndBug/add-and-commit@v9
