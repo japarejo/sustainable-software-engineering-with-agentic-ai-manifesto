@@ -1,0 +1,89 @@
+name: Signature Request
+description: Request to be added as a signatory of the Sustainable Software Engineering with Agentic AI Manifesto
+title: "Signature Request – "
+labels: ["signature-request"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for your interest in endorsing the **Sustainable Software Engineering with Agentic AI Manifesto**.
+
+        Please complete the form below. A maintainer will review your request and append your signature in chronological order.
+
+  - type: input
+    id: full_name
+    attributes:
+      label: Full Name
+      description: Your full legal name (no pseudonyms).
+      placeholder: e.g., Jane Doe
+    validations:
+      required: true
+
+  - type: input
+    id: role
+    attributes:
+      label: Role / Title
+      description: Your professional role or title.
+      placeholder: e.g., Software Architect, Associate Professor
+    validations:
+      required: true
+
+  - type: input
+    id: affiliation
+    attributes:
+      label: Affiliation
+      description: Organization, university, company, or independent.
+      placeholder: e.g., University of Sevilla / Independent Engineer
+    validations:
+      required: true
+
+  - type: input
+    id: country
+    attributes:
+      label: Country
+      description: Country of professional affiliation.
+      placeholder: e.g., Spain
+    validations:
+      required: true
+
+  - type: dropdown
+    id: signing_type
+    attributes:
+      label: Signing As
+      description: Select how you are signing.
+      options:
+        - Individual
+        - Organization (authorized representative)
+    validations:
+      required: true
+
+  - type: textarea
+    id: organization_details
+    attributes:
+      label: If signing on behalf of an organization
+      description: |
+        Provide organization name and confirm that you are an authorized representative.
+      placeholder: |
+        Organization name:
+        I confirm that I am authorized to sign on behalf of this organization.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: commitments
+    attributes:
+      label: Declaration
+      description: By checking the box below, you affirm your endorsement.
+      options:
+        - label: I have read the manifesto and support its principles. I understand that signing is a professional and ethical commitment, not a legal contract.
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        After submission:
+        - A maintainer will verify your information.
+        - Your name will be appended to `SIGNATORIES.md` in chronological order.
+        - The issue will then be closed.
