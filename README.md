@@ -1,8 +1,7 @@
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 # 🧭 The Sustainable Sofftware Engineering Manifesto  
 ## In the Age of Agentic AI
-> **Automation must amplify engineering judgment — not replace it.**
-
+> **AI Automation must amplify engineering judgment — not replace it.**
 ---
 
 ## Why This Manifesto?
@@ -16,7 +15,7 @@ Agentic AI systems can now:
 
 Their productivity impact is undeniable.
 
-But if adopted without governance, they risk eroding:
+But if adopted without proper governance, they risk eroding:
 
 - Human accountability  
 - Design competence  
@@ -31,8 +30,7 @@ This manifesto defines the values required to ensure that automation strengthens
 ---
 
 # 📜 Our Hierarchy of Values
-
-We recognize the value of the items on the right.  
+Inspired by the agile manifesto, we recognize the value of the items on the right.  
 But we value the items on the left more.
 
 | We Value | Over |
@@ -103,7 +101,7 @@ to endorse these principles.
 2. Add your name, affiliation, and country to `SIGNATORIES.md`.
 3. Submit a Pull Request.
 
-Alternatively, you may request inclusion via Issue if you are unfamiliar with Git workflows.
+Alternatively, you may [request inclusion via Issue](https://github.com/japarejo/sustainable-software-engineering-with-agentic-ai-manifesto/issues/new?title=Signature%20Request%20-%20Your%20Name&body=Please%20add%20my%20signature%20to%20the%20Sustainable%20Software%20Engineering%20with%20Agentic%20AI%20Manifesto.%0A%0AFull%20Name:%20%0ARole%20/%20Title:%20%0AAffiliation:%20%0ACountry:%20%0ASigning%20as:%20(Individual%20/%20Organization)%0A%0AIf%20organization,%20please%20confirm%20you%20are%20an%20authorized%20representative.) if you are unfamiliar with Git workflows.
 
 ---
 
@@ -118,7 +116,7 @@ This manifesto is grounded in research on:
 
 A full conceptual and empirical rationale is available in:
 
-📄 `RATIONALE.md`
+[📄 `RATIONALE.md`](https://github.com/japarejo/sustainable-software-engineering-with-agentic-ai-manifesto/blob/main/RATIONALE.md)
 
 ---
 
