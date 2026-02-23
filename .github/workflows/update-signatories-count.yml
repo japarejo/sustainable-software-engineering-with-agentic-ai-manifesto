@@ -1,0 +1,36 @@
+name: Update Signatories Count
+
+on:
+  push:
+    paths:
+      - "SIGNATORIES.md"
+
+jobs:
+  update-count:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Count signatories
+        id: count
+        run: |
+          COUNT=$(grep -c '^|' SIGNATORIES.md)
+          # subtract header lines (adjust if needed)
+          COUNT=$((COUNT - 4))
+          echo "count=$COUNT" >> $GITHUB_OUTPUT
+
+      - name: Update JSON file
+        run: |
+          echo "{
+            \"label\": \"Signatories\",
+            \"message\": \"${{ steps.count.outputs.count }}\",
+            \"color\": \"blue\"
+          }" > signatories-count.json
+
+      - name: Commit updated count
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "signatories-count.json"
+          message: "Update signatories count"
