@@ -1,5 +1,7 @@
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
-![Signatories](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/japarejo/sustainable-software-engineering-with-agentic-ai-manifesto/main/signatories-count.json)
+![Individuals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/japarejo/sustainable-software-engineering-with-agentic-ai-manifesto/main/signatories-individuals.json)
+![Organizations](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/japarejo/sustainable-software-engineering-with-agentic-ai-manifesto/main/signatories-organizations.json)
+![Signatories](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/japarejo/sustainable-software-engineering-with-agentic-ai-manifesto/main/signatories-total.json)
 # 🧭 The Sustainable Sofftware Engineering Manifesto  
 ## In the Age of Agentic AI
 > **AI Automation must amplify engineering judgment — not replace it.**
