@@ -71,7 +71,7 @@ We are opposed to:
 - Opaque development pipelines  
 - The erosion of engineering judgment in favor of productivity gains through IA 
 
-AI and software engineering discipline are complementary and synergic.
+AI and software engineering disciplines are complementary and synergic.
 
 But without deliberate governance, short-term efficiency can undermine long-term resilience.
 
