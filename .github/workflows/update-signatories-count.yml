@@ -16,7 +16,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+        with:
+          # This dynamically grabs the correct branch name for push, 
+          # workflow_dispatch, and even pull_request events.
+          ref: ${{ github.head_ref || github.ref_name }}
+          
       - name: Count signatories
         id: counts
         shell: bash
