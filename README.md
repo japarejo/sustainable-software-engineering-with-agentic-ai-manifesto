@@ -39,7 +39,7 @@ But we value the items on the left more.
 | We Value | Over |
 |-----------|------|
 | **Human agency and accountability** | Opaque efficiency |
-| **Explicit design decisions** | Functionally correct auto-generated implementation |
+| **Explicit design decisions & Synthesis of Trade-offs (Non-functional, Ethical)** | Functionally correct auto-generated implementation |
 | **Critical evaluation** | Practical plausibility |
 | **Evidence-based rigorous validation** | Short-term delivery speed |
 | **Learning through cognitive friction** | Delegation convenience |
