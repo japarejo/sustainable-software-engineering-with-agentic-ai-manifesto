@@ -41,7 +41,7 @@ But we value the items on the left more.
 | **Human agency and accountability** | Opaque efficiency |
 | **Explicit design decisions** | Functionally correct auto-generated implementation |
 | **Critical evaluation** | Practical plausibility |
-| **Evidence-based rigorous validation** | Delivery speed |
+| **Evidence-based rigorous validation** | Short-term delivery speed |
 | **Learning through cognitive friction** | Delegation convenience |
 | **Team social capital (mentoring & collaboration)** | Brute-force computational power |
 | **Structural prudence (Zero Trust)** | Tool/agent autonomy |
