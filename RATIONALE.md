@@ -229,4 +229,4 @@ It responds constructively to:
 
 The future of engineering will not be determined solely by what we can automate.
 
-It will be determined by what we choose to govern.
+It will be determined by what we choose to govern and how we do it.
