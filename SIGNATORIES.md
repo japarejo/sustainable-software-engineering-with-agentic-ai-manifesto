@@ -16,6 +16,7 @@ _Chronological order._
 | Signature # | Name | Role / Title | Affiliation | Country | Date Signed |
 |-------------|------|-------------|------------|---------|------------|
 | 1 | José Antonio Parejo Maestre | Associate Professor | University of Sevilla | Spain | 2026-03-23|
+| 2 | Matteo Bertamini | Software Engineer | Telefónica Innovación Digital | Spain | 2026-05-03|
 | 2 |  |  |  |  | YYYY-MM-DD |
 
 ---
