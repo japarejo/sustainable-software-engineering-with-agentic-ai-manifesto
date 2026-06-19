@@ -163,4 +163,12 @@ Not a spectator sport in the age of automation.
 
 # ⭐ Support the Initiative
 
-If you believe these p
+If you believe these principles matter:
+
+- ⭐ Star this repository  
+- 🔁 Share it with your network  
+- 🗣 Start a discussion in your organization  
+- ✍ Add your signature  
+
+The future of software engineering depends not only on what we can automate —  
+but on what and how we choose to govern.
