@@ -2,9 +2,14 @@
 ![Individuals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/japarejo/sustainable-software-engineering-with-agentic-ai-manifesto/main/signatories-individuals.json)
 ![Organizations](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/japarejo/sustainable-software-engineering-with-agentic-ai-manifesto/main/signatories-organizations.json)
 ![Signatories](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/japarejo/sustainable-software-engineering-with-agentic-ai-manifesto/main/signatories-total.json)
-# 🧭 The Sustainable Sofftware Engineering Manifesto  
+# 🧭 The Sustainable Software Engineering Manifesto  
 ## In the Age of Agentic AI
 > **AI Automation must amplify engineering judgment — not replace it.**
+
+### [✍️ Sign the manifesto in 30 seconds →](https://github.com/japarejo/sustainable-software-engineering-with-agentic-ai-manifesto/issues/new?template=signature.yml)
+
+No fork, no pull request, no waiting: fill in a short form and your name is added **automatically**. Prefer Git? A Pull Request works too — [see how](SIGNATORIES.md).
+
 ---
 
 ## Why This Manifesto?
@@ -100,11 +105,15 @@ to endorse these principles.
 
 ## How to Sign
 
-1. Fork this repository.
-2. Add your name, affiliation, and country to `SIGNATORIES.md`.
-3. Submit a Pull Request.
+### Easiest — sign in 30 seconds (recommended, no Git needed)
 
-Alternatively, you may [request inclusion via Issue](https://github.com/japarejo/sustainable-software-engineering-with-agentic-ai-manifesto/issues/new?title=Signature%20Request%20-%20Your%20Name&body=Please%20add%20my%20signature%20to%20the%20Sustainable%20Software%20Engineering%20with%20Agentic%20AI%20Manifesto.%0A%0AFull%20Name:%20%0ARole%20/%20Title:%20%0AAffiliation:%20%0ACountry:%20%0ASigning%20as:%20(Individual%20/%20Organization)%0A%0AIf%20organization,%20please%20confirm%20you%20are%20an%20authorized%20representative.) if you are unfamiliar with Git workflows.
+**[➡ Open the signature form](https://github.com/japarejo/sustainable-software-engineering-with-agentic-ai-manifesto/issues/new?template=signature.yml)**, fill in a few fields and submit. A bot appends your signature to [`SIGNATORIES.md`](SIGNATORIES.md) **automatically** within a minute and closes the request — no maintainer wait.
+
+### Alternative — Pull Request (for Git users)
+
+1. Fork this repository.
+2. Add your row to the appropriate table in [`SIGNATORIES.md`](SIGNATORIES.md).
+3. Submit a Pull Request. Badges update automatically once it is merged.
 
 ---
 
@@ -154,12 +163,4 @@ Not a spectator sport in the age of automation.
 
 # ⭐ Support the Initiative
 
-If you believe these principles matter:
-
-- ⭐ Star this repository  
-- 🔁 Share it with your network  
-- 🗣 Start a discussion in your organization  
-- ✍ Add your signature  
-
-The future of software engineering depends not only on what we can automate —  
-but on what and how we choose to govern.
+If you believe these p

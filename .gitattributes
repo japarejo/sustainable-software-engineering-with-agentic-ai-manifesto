@@ -1,0 +1,12 @@
+# Keep text files with LF line endings so the signatory-counting and
+# auto-signing GitHub Actions parse them reliably (CRLF breaks awk matching).
+* text=auto eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Binary assets should never be normalized.
+*.pdf binary
+*.png binary
+*.jpg binary

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: ✍️ Sign the manifesto
+    url: https://github.com/japarejo/sustainable-software-engineering-with-agentic-ai-manifesto/issues/new?template=signature.yml
+    about: Add your signature in 30 seconds — it is appended automatically.
+  - name: 📄 Read the manifesto
+    url: https://github.com/japarejo/sustainable-software-engineering-with-agentic-ai-manifesto/blob/main/README.md
+    about: Read the full manifesto before signing.

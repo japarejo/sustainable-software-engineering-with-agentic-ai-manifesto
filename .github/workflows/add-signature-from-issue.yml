@@ -1,0 +1,88 @@
+name: Add Signature From Issue
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+# Serialize runs so concurrent signatures don't race on the same file / push.
+concurrency:
+  group: signatories-write
+  cancel-in-progress: false
+
+jobs:
+  add-signature:
+    # Only act on issues created from the signature form.
+    if: contains(join(github.event.issue.labels.*.name, ','), 'signature-request')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Parse issue and append signature
+        id: sign
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: python3 .github/scripts/add_signature.py
+
+      - name: Recount signatories and write badge JSON
+        if: steps.sign.outputs.status == 'added'
+        run: python3 .github/scripts/update_badges.py
+
+      - name: Commit signature and badges
+        if: steps.sign.outputs.status == 'added'
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: |
+            SIGNATORIES.md
+            signatories-individuals.json
+            signatories-organizations.json
+            signatories-total.json
+          message: "chore: add signatory from issue #${{ github.event.issue.number }}"
+          pull: "--rebase --autostash"
+
+      - name: Thank the signatory and close the issue
+        if: steps.sign.outputs.status == 'added'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const name = `${{ steps.sign.outputs.name }}`;
+            const number = `${{ steps.sign.outputs.number }}`;
+            const category = `${{ steps.sign.outputs.category }}`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `✅ Thank you, **${name}**! You are now ${category === 'organization' ? 'organizational' : 'individual'} signatory **#${number}**.\n\nYour name has been added to [\`SIGNATORIES.md\`](../blob/main/SIGNATORIES.md) and the badges have been updated. Closing this issue — welcome aboard! 🌱`,
+            });
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed',
+            });
+
+      - name: Request missing information
+        if: steps.sign.outputs.status == 'invalid'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const reason = `${{ steps.sign.outputs.reason }}`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `⚠️ I couldn't add your signature automatically: ${reason}\n\nPlease edit this issue or open a new one using the [signature form](../issues/new?template=signature.yml).`,
+            });

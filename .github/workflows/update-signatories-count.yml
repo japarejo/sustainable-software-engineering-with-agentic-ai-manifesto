@@ -17,84 +17,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          # This dynamically grabs the correct branch name for push, 
-          # workflow_dispatch, and even pull_request events.
+          # Dynamically grab the correct branch for push / workflow_dispatch / pull_request.
           ref: ${{ github.head_ref || github.ref_name }}
-          
-      - name: Count signatories
-        id: counts
-        shell: bash
-        run: |
-          set -euo pipefail
 
-          # Extract the first markdown table after a heading and count non-empty rows.
-          # - Skips the header row and separator row
-          # - Skips placeholder rows where the Name/Org column is empty
-          #
-          # For individuals, the "Name" column is column 3 in the raw split by "|":
-          #   | Signature # | Name | Role / Title | ...
-          # For organizations, the "Organization" column is column 3:
-          #   | Signature # | Organization | Type | ...
-          #
-          # Note: split($0,a,"|") yields:
-          #   a[1] = "" (before first |), a[2] = " Signature # ", a[3] = " Name ", etc.
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
 
-          count_table_after_heading () {
-            local heading="$1"
-            local name_col_index="$2"
-
-            # 1) Find the first table after the heading
-            # 2) Output only table lines until the table ends
-            # 3) Count data rows with non-empty Name/Org cell
-            awk -v heading="$heading" '
-              BEGIN { in_section=0; in_table=0; }
-              $0 == heading { in_section=1; next }
-              in_section && $0 ~ "^\\|" { in_table=1 }
-              in_section && in_table {
-                if ($0 !~ "^\\|") exit
-                print
-              }
-            ' SIGNATORIES.md \
-            | awk -v name_col_index="$name_col_index" '
-              function trim(s){ gsub(/^[ \t]+|[ \t]+$/, "", s); return s }
-              BEGIN { count=0 }
-              {
-                # Skip separator rows like |---|---|
-                if ($0 ~ /^(\|[[:space:]]*[-:]+[[:space:]]*)+\|[[:space:]]*$/) next
-
-                # Skip header row (first non-separator table line)
-                if (!header_skipped) { header_skipped=1; next }
-
-                split($0, a, "|")
-                name = trim(a[name_col_index])
-
-                # Skip placeholder / empty entries
-                if (name == "") next
-
-                count++
-              }
-              END { print count }
-            '
-          }
-
-          INDIV=$(count_table_after_heading "# 👤 Individual Signatories" 3)
-          ORGS=$(count_table_after_heading "# 🏢 Organizational Signatories" 3)
-          TOTAL=$((INDIV + ORGS))
-
-          echo "individuals=$INDIV" >> "$GITHUB_OUTPUT"
-          echo "organizations=$ORGS" >> "$GITHUB_OUTPUT"
-          echo "total=$TOTAL" >> "$GITHUB_OUTPUT"
-
-      - name: Write badge JSON files
-        shell: bash
-        run: |
-          INDIV="${{ steps.counts.outputs.individuals }}"
-          ORGS="${{ steps.counts.outputs.organizations }}"
-          TOTAL="${{ steps.counts.outputs.total }}"
-
-          printf '{ "label": "Individuals", "message": "%s", "color": "blue" }\n' "$INDIV" > signatories-individuals.json
-          printf '{ "label": "Organizations", "message": "%s", "color": "blue" }\n' "$ORGS" > signatories-organizations.json
-          printf '{ "label": "Signatories", "message": "%s", "color": "blue" }\n' "$TOTAL" > signatories-total.json
+      - name: Recount signatories and write badge JSON
+        run: python3 .github/scripts/update_badges.py
 
       - name: Commit badge updates
         uses: EndBug/add-and-commit@v9

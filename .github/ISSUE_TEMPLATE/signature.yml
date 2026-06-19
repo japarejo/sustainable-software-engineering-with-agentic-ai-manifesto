@@ -8,9 +8,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thank you for your interest in endorsing the **Sustainable Software Engineering with Agentic AI Manifesto**.
+        Thank you for endorsing the **Sustainable Software Engineering with Agentic AI Manifesto**.
 
-        Please complete the form below. A maintainer will review your request and append your signature in chronological order.
+        Complete this short form and submit. Your signature is appended to `SIGNATORIES.md` **automatically** within a minute, and this issue closes itself — no waiting.
 
   - type: input
     id: full_name
@@ -59,15 +59,12 @@ body:
     validations:
       required: true
 
-  - type: textarea
-    id: organization_details
+  - type: input
+    id: organization_name
     attributes:
-      label: If signing on behalf of an organization
-      description: |
-        Provide organization name and confirm that you are an authorized representative.
-      placeholder: |
-        Organization name:
-        I confirm that I am authorized to sign on behalf of this organization.
+      label: Organization name (only if signing as an organization)
+      description: Leave blank if you are signing as an individual. The "Affiliation" field is used otherwise.
+      placeholder: e.g., University of Sevilla
     validations:
       required: false
 
@@ -83,7 +80,4 @@ body:
   - type: markdown
     attributes:
       value: |
-        After submission:
-        - A maintainer will verify your information.
-        - Your name will be appended to `SIGNATORIES.md` in chronological order.
-        - The issue will then be closed.
+        After you submit, a bot automatically appends your signature to `SIGNATORIES.md` in chronological order and closes this issue. If anything looks off, just reopen or comment.
