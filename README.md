@@ -48,7 +48,7 @@ But we value the items on the left more.
 | **Critical evaluation** | Practical plausibility |
 | **Evidence-based rigorous validation** | Short-term delivery speed |
 | **Learning through cognitive friction** | Delegation convenience |
-| **Team social capital (mentoring & collaboration)** | Brute-force computational power |
+| **Team social capital (mentoring & collaboration)** | Brute-force computational/token power |
 | **Structural prudence (Zero Trust)** | Tool/agent autonomy |
 
 ---
