@@ -15,8 +15,8 @@ concurrency:
 
 jobs:
   add-signature:
-    # Only act on issues created from the signature form.
-    if: contains(join(github.event.issue.labels.*.name, ','), 'signature-request')
+    # Only act on issues created from the signature form (check both label and title pattern).
+    if: contains(join(github.event.issue.labels.*.name, ','), 'signature-request') || startsWith(github.event.issue.title, 'Signature Request')
     runs-on: ubuntu-latest
 
     steps:
