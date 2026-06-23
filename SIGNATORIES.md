@@ -25,6 +25,7 @@ _Chronological order. New entries are appended automatically at the end of the t
 | 1 | José Antonio Parejo Maestre | Associate Professor | University of Sevilla | Spain | 2026-03-23 |
 | 2 | Matteo Bertamini | Software Engineer | Telefónica Innovación Digital | Spain | 2026-05-03 |
 | 3 | Pablo Fernandez | Full Professor | Universidad de Sevilla | Spain | 2026-06-22 |
+| 4 | Aurora Ramírez | Associate Professor | University of Córdoba | Spain | 2026-06-23 |
 <!-- INDIVIDUAL_SIGNATORIES_END -->
 
 ---
