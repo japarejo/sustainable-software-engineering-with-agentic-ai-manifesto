@@ -27,6 +27,7 @@ _Chronological order. New entries are appended automatically at the end of the t
 | 3 | Pablo Fernandez | Full Professor | Universidad de Sevilla | Spain | 2026-06-22 |
 | 4 | Aurora Ramírez | Associate Professor | University of Córdoba | Spain | 2026-06-23 |
 | 5 | Javier Mateos Manzano | PhD Student | University of Extremadura | Spain | 2026-06-23 |
+| 6 | Juan Diego Gutiérrez Gallardo | Assistant Professor | Universidad de Extremadura | Spain | 2026-06-23 |
 <!-- INDIVIDUAL_SIGNATORIES_END -->
 
 ---
