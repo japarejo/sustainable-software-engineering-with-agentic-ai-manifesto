@@ -28,6 +28,7 @@ _Chronological order. New entries are appended automatically at the end of the t
 | 4 | Aurora Ramírez | Associate Professor | University of Córdoba | Spain | 2026-06-23 |
 | 5 | Javier Mateos Manzano | PhD Student | University of Extremadura | Spain | 2026-06-23 |
 | 6 | Juan Diego Gutiérrez Gallardo | Assistant Professor | Universidad de Extremadura | Spain | 2026-06-23 |
+| 7 | Inmaculada Medina Bulo | Full professor | University of Cádiz | Spain | 2026-06-24 |
 <!-- INDIVIDUAL_SIGNATORIES_END -->
 
 ---
